@@ -50,9 +50,11 @@ public class ZiplineItem extends Item {
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack itemStack, int i) {
         super.onUseTick(level, livingEntity, itemStack, i);
 
+
         if (!level.isClientSide || !(livingEntity instanceof Player player) || !player.isLocalPlayer()) {
             return;
         }
+
 
         if (!actuallyUsing) {
             var playerPos = player.position();
@@ -72,6 +74,7 @@ public class ZiplineItem extends Item {
                 enable(player, offsetPlayerPos);
             }
         }
+
 
         if (actuallyUsing) {
             ziplineTick(player, level);
@@ -182,7 +185,7 @@ public class ZiplineItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         var itemStack = player.getItemInHand(interactionHand);
 
         player.startUsingItem(interactionHand);
