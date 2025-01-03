@@ -2,9 +2,11 @@
   "schemaVersion": 1,
   "id": "zipline",
   "version": "${version}",
-  "name": "zipline",
-  "description": "",
-  "authors": [],
+  "name": "Zipline",
+  "description": "Satisfactory inspired ziplines in minecraft",
+  "authors": [
+    "Tomate0613"
+  ],
   "contact": {},
   "license": "MIT",
   "icon": "assets/zipline/icon.png",
