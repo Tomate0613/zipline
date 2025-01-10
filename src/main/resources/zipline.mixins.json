@@ -4,13 +4,13 @@
   "package": "dev.doublekekse.zipline.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ServerGamePacketListenerImplMixin"
+    "ServerGamePacketListenerImplMixin",
+    "compat.connectiblechains.ChainCollisionEntityMixin"
   ],
   "client": [
     "GameRendererMixin",
     "HumanoidModelMixin",
-    "ItemInHandRendererMixin",
-    "compat.connectiblechains.ChainCollisionEntityMixin"
+    "ItemInHandRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
