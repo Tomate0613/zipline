@@ -3,10 +3,8 @@ package dev.doublekekse.zipline.item;
 import dev.doublekekse.zipline.Cable;
 import dev.doublekekse.zipline.Cables;
 import dev.doublekekse.zipline.client.ZiplineClient;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.BlockPos;
+import dev.doublekekse.zipline.registry.ZiplineSoundEvents;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -16,17 +14,19 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 public class ZiplineItem extends Item {
     public Cable cable = null;
 
-    private Vec3 initialLookDirection = null;
+    private int directionFactor;
     private boolean actuallyUsing = false;
     private Vec3 lastDir = null;
     private double speed = 0;
-    private double t;
+    private double progress;
 
     private static final double HANG_OFFSET = 2.12;
     private static final double TOP_VERTICAL_SNAP_FACTOR = 0.3;
@@ -70,7 +70,7 @@ public class ZiplineItem extends Item {
             var closestPoint = cable.getClosestPoint(offsetPlayerPos);
             var playerAttachPos = closestPoint.add(0, -HANG_OFFSET, 0);
 
-            if (closestPoint.y > playerPos.y + TOP_VERTICAL_SNAP_FACTOR * HANG_OFFSET && !isInvalidPosition(player, playerAttachPos)) {
+            if (closestPoint.y > playerPos.y + TOP_VERTICAL_SNAP_FACTOR * HANG_OFFSET && !isInvalidPosition(player, playerAttachPos.subtract(playerPos))) {
                 enable(player, offsetPlayerPos);
             }
         }
@@ -82,18 +82,23 @@ public class ZiplineItem extends Item {
     }
 
     void enable(Player player, Vec3 offsetPlayerPos) {
-        initialLookDirection = player.getLookAngle();
+        directionFactor = player.getLookAngle().dot(cable.direction()) >= 0 ? 1 : -1;
         actuallyUsing = true;
         speed = player.getDeltaMovement().length();
-        t = cable.getProgress(offsetPlayerPos);
+        progress = cable.getProgress(offsetPlayerPos);
 
-        var futureT = t + directionFactor() * .1 / cable.length();
+        var futureT = progress + directionFactor * .1 / cable.length();
         var delta = cable.getPoint(futureT).subtract(offsetPlayerPos);
 
         float yaw = (float) (Mth.atan2(delta.z, delta.x) * 57.2957763671875 - player.getYRot());
         ZiplineClient.ziplineTilt(yaw);
 
-        player.playSound(SoundEvents.IRON_GOLEM_DAMAGE, 0.6f, 1);
+        player.playSound(ZiplineSoundEvents.ZIPLINE_ATTACH, 0.6f, 1);
+    }
+
+    void disable() {
+        actuallyUsing = false;
+        speed = 0;
     }
 
     void updateSpeed() {
@@ -102,50 +107,55 @@ public class ZiplineItem extends Item {
         }
     }
 
-    boolean isForwards() {
-        double dotProduct = initialLookDirection.dot(cable.direction());
-        return dotProduct >= 0;
-    }
-
-    int directionFactor() {
-        return isForwards() ? 1 : -1;
-    }
-
     void updateProgress() {
-        t += directionFactor() * speed / cable.length();
+        progress += directionFactor * speed / cable.length();
 
-        t = Mth.clamp(t, 0.0, 1.0);
+        progress = Mth.clamp(progress, 0.0, 1.0);
     }
 
-    boolean isInvalidPosition(Player player, Vec3 pos) {
-        return ((LocalPlayer) player).suffocatesAt(BlockPos.containing(pos.add(0, -HANG_OFFSET, 0)));
+    boolean hasCollision(Iterable<VoxelShape> shapes) {
+        for (var shape : shapes) {
+            if (!shape.isEmpty()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    boolean isInvalidPosition(Player player, Vec3 deltaPos) {
+        AABB collisionBox = player.getBoundingBox().move(deltaPos);
+        Iterable<VoxelShape> blockCollisions = player.level().getBlockCollisions(player, collisionBox);
+
+        return hasCollision(blockCollisions);
     }
 
     void ziplineTick(Player player, Level level) {
-        var closestPoint = cable.getPoint(t);
+        var closestPoint = cable.getPoint(progress);
 
         updateSpeed();
         updateProgress();
 
-        Vec3 newPosition = cable.getPoint(t);
+        Vec3 newPosition = cable.getPoint(progress);
+        Vec3 newOffsetPosition = new Vec3(newPosition.x, newPosition.y - HANG_OFFSET, newPosition.z);
+
         lastDir = newPosition.subtract(closestPoint);
 
-        var oldPosition = player.position();
-        player.setPos(newPosition.x, newPosition.y - HANG_OFFSET, newPosition.z);
-
-        if (isInvalidPosition(player, newPosition)) {
-            player.setPos(oldPosition);
+        if (isInvalidPosition(player, lastDir)) {
             interruptUsing(player);
 
             return;
         }
 
 
+        player.setPos(newOffsetPosition);
+
+
         player.setDeltaMovement(0, 0, 0);
 
-        player.playSound(SoundEvents.IRON_GOLEM_STEP, 1.0F, .3f + (float) (speed));
+        player.playSound(ZiplineSoundEvents.ZIPLINE_USE, 1.0F, .3f + (float) (speed));
 
-        if (t >= 1.0 || t <= 0.0) {
+        if (progress >= 1.0 || progress <= 0.0) {
             interruptUsing(player);
         }
     }
@@ -155,7 +165,8 @@ public class ZiplineItem extends Item {
         applyExitMomentum(player);
         player.getCooldowns().addCooldown(this, 20);
 
-        player.playSound(SoundEvents.IRON_GOLEM_REPAIR, 0.5f, 1);
+        player.playSound(ZiplineSoundEvents.ZIPLINE_INTERRUPT, 0.5f, 1);
+        disable();
     }
 
     void applyExitMomentum(LivingEntity livingEntity) {
@@ -165,9 +176,11 @@ public class ZiplineItem extends Item {
 
     @Override
     public void releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int i) {
-        if (livingEntity instanceof Player player) {
-            player.getCooldowns().addCooldown(this, 10);
+        if (!(livingEntity instanceof Player player)) {
+            return;
         }
+
+        player.getCooldowns().addCooldown(this, 10);
 
         if (!level.isClientSide) {
             return;
@@ -176,10 +189,8 @@ public class ZiplineItem extends Item {
         if (actuallyUsing) {
             livingEntity.addDeltaMovement(new Vec3(0, 0.8, 0));
             applyExitMomentum(livingEntity);
+            disable();
         }
-
-        actuallyUsing = false;
-        speed = 0;
 
         super.releaseUsing(itemStack, level, livingEntity, i);
     }

@@ -1,0 +1,40 @@
+{
+  "zipline_use": {
+    "sounds": [
+      "minecraft:mob/irongolem/walk1",
+      "minecraft:mob/irongolem/walk2",
+      "minecraft:mob/irongolem/walk3",
+      "minecraft:mob/irongolem/walk4"
+    ],
+    "subtitle": "subtitles.zipline.zipline.use"
+  },
+  "zipline_attach": {
+    "sounds": [
+      {
+        "name": "mob/irongolem/damage1",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/irongolem/damage1",
+        "pitch": 0.8,
+        "volume": 0.8
+      },
+      {
+        "name": "mob/irongolem/damage2",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/irongolem/damage2",
+        "pitch": 0.8,
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.zipline.zipline.attach"
+  },
+  "zipline_interrupt": {
+    "sounds": [
+      "mob/irongolem/repair"
+    ],
+    "subtitle": "subtitles.zipline.zipline.interrupt"
+  }
+}

@@ -1,4 +1,9 @@
 {
   "item.zipline.zipline": "Zipline",
-  "itemGroup.zipline.zipline": "Zipline"
+  "itemGroup.zipline.zipline": "Zipline",
+
+  "subtitles.zipline.zipline.use": "Zipline zips",
+  "subtitles.zipline.zipline.attach": "Zipline attaches",
+  "subtitles.zipline.zipline.detach": "Zipline detaches",
+  "subtitles.zipline.zipline.interrupt": "Zipline gets interrupted"
 }
