@@ -2,20 +2,14 @@ package dev.doublekekse.zipline.mixin.compat.connectiblechains;
 
 import com.github.legoatoom.connectiblechains.entity.ChainCollisionEntity;
 import dev.doublekekse.zipline.registry.ZiplineItems;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(ChainCollisionEntity.class)
 public abstract class ChainCollisionEntityMixin extends Entity {
-    @Shadow
-    public abstract InteractionResult interact(Player player, InteractionHand hand);
-
     public ChainCollisionEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
