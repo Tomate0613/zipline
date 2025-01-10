@@ -5,7 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "ServerGamePacketListenerImplMixin",
-    "compat.connectiblechains.ChainCollisionEntityMixin"
+    "compat.connectiblechains.EntityMixin"
   ],
   "client": [
     "GameRendererMixin",
