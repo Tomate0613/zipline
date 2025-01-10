@@ -18,6 +18,7 @@ public class ServerGamePacketListenerImplMixin {
     /**
      * Prevent flying kick when using zipline
      */
+    /*
     @Inject(method = "getMaximumFlyingTicks", at = @At("HEAD"), cancellable = true)
     void getMaximumFlyingTicks(Entity entity, CallbackInfoReturnable<Integer> cir) {
         if (!(entity instanceof Player player)) {
@@ -28,6 +29,7 @@ public class ServerGamePacketListenerImplMixin {
             cir.setReturnValue(Integer.MAX_VALUE);
         }
     }
+     */
 
     /**
      * Prevent moving incorrectly kick when using zipline

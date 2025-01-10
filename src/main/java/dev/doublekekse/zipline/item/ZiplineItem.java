@@ -41,8 +41,9 @@ public class ZiplineItem extends Item {
         return UseAnim.NONE;
     }
 
+
     @Override
-    public int getUseDuration(ItemStack itemStack, LivingEntity livingEntity) {
+    public int getUseDuration(ItemStack itemStack) {
         return 0;
     }
 

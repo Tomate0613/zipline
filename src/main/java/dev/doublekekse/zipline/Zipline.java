@@ -15,6 +15,6 @@ public class Zipline implements ModInitializer {
     }
 
     public static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath("zipline", path);
+        return new ResourceLocation("zipline", path);
     }
 }

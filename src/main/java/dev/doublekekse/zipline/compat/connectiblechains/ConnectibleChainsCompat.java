@@ -22,8 +22,8 @@ public class ConnectibleChainsCompat {
 
             for (var knot : knots) {
                 for (var chainLink : knot.getLinks()) {
-                    var from = chainLink.getPrimary();
-                    var to = chainLink.getSecondary();
+                    var from = chainLink.primary;
+                    var to = chainLink.secondary;
 
 
                     var cable = ChainCable.from(from, to);

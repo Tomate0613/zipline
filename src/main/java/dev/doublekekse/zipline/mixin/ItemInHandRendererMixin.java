@@ -71,7 +71,7 @@ public abstract class ItemInHandRendererMixin {
 
     @Unique
     void shake(ItemStack itemStack, AbstractClientPlayer abstractClientPlayer, float tickDelta, PoseStack poseStack) {
-        float useFactor = itemStack.getUseDuration(abstractClientPlayer) - (abstractClientPlayer.getUseItemRemainingTicks() - tickDelta + 1.0f);
+        float useFactor = itemStack.getUseDuration() - (abstractClientPlayer.getUseItemRemainingTicks() - tickDelta + 1.0f);
 
         float m = Mth.sin((useFactor - 0.1f) * 1.3f);
         float q = Mth.sin((useFactor * .3f - 0.4f) * 1.3f);
