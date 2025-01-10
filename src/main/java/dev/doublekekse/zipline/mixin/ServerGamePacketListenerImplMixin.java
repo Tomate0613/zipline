@@ -30,11 +30,23 @@ public class ServerGamePacketListenerImplMixin {
     }
 
     /**
-     * Prevent moved to fast kick when using zipline
+     * Prevent moving incorrectly kick when using zipline
      */
     @WrapOperation(method = "handleMovePlayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;isSleeping()Z", ordinal = 1))
     boolean handleMovePlayer(ServerPlayer instance, Operation<Boolean> original) {
         if (isUsingZipline(instance)) {
+            return true;
+        }
+
+        return original.call(instance);
+    }
+
+    /**
+     * Prevent moving too quickly kick when using zipline
+     */
+    @WrapOperation(method = "handleMovePlayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerGamePacketListenerImpl;isSingleplayerOwner()Z"))
+    boolean isSinglePlayerOwner(ServerGamePacketListenerImpl instance, Operation<Boolean> original) {
+        if (isUsingZipline(instance.player)) {
             return true;
         }
 
