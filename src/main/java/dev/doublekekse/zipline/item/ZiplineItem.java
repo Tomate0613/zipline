@@ -43,7 +43,7 @@ public class ZiplineItem extends Item {
 
     @Override
     public int getUseDuration(ItemStack itemStack, LivingEntity livingEntity) {
-        return 0;
+        return Integer.MAX_VALUE;
     }
 
     @Override
