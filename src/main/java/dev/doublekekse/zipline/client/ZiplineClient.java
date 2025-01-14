@@ -1,13 +1,11 @@
 package dev.doublekekse.zipline.client;
 
-import dev.doublekekse.zipline.Cables;
 import dev.doublekekse.zipline.compat.connectiblechains.ConnectibleChainsCompat;
+import dev.doublekekse.zipline.compat.createaddition.CreateAdditionCompat;
 import dev.doublekekse.zipline.duck.GameRendererDuck;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.particles.ParticleTypes;
 
 public class ZiplineClient implements ClientModInitializer {
 
@@ -15,6 +13,7 @@ public class ZiplineClient implements ClientModInitializer {
     public void onInitializeClient() {
         compat();
 
+        /*
         ClientTickEvents.START_WORLD_TICK.register((level) -> {
             var cable = Cables.getClosestCable(level.players().get(0).position(), 10);
 
@@ -31,11 +30,15 @@ public class ZiplineClient implements ClientModInitializer {
                 );
             }
         });
+         */
     }
 
     public void compat() {
         if (FabricLoader.getInstance().isModLoaded("connectiblechains")) {
             ConnectibleChainsCompat.register();
+        }
+        if (FabricLoader.getInstance().isModLoaded("createaddition")) {
+            CreateAdditionCompat.register();
         }
     }
 
