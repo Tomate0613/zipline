@@ -60,8 +60,8 @@ dependencies {
     modApi "me.shedaniel.cloth:cloth-config-fabric:11.1.136"
 
     modImplementation "maven.modrinth:connectiblechains:v2.2.1+1.20.1"
-    // modImplementation "maven.modrinth:createaddition:1.20.1-1.2.4"
-    modCompileOnly "com.mrh0.createaddition:createaddition:fabric+1.20.1-1.2.4"
+    modImplementation "maven.modrinth:createaddition:1.20.1-1.2.4"
+    //modCompileOnly "com.mrh0.createaddition:createaddition:fabric+1.20.1-1.2.4"
     modImplementation("com.simibubi.create:create-fabric-${project.minecraft_version}:" +
             "0.5.1-f-build.1335+mc${project.minecraft_version}")
 }
