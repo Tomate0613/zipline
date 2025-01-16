@@ -1,14 +1,13 @@
 package dev.doublekekse.zipline.compat.createaddition;
 
-import com.mrh0.createaddition.blocks.connector.base.AbstractConnectorBlockEntity;
 import dev.doublekekse.zipline.duck.LevelDuck;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public class CreateAdditionLevelAttachment {
-    public List<AbstractConnectorBlockEntity> connectors = new ArrayList<>();
+    public HashSet<BlockPos> connectorPositions = new HashSet<>();
 
     public static CreateAdditionLevelAttachment getAttachment(Level level) {
         return ((LevelDuck) level).zipline$getCAAttachment();

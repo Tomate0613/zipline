@@ -20,11 +20,11 @@ public abstract class AbstractConnectorBlockEntityMixin extends SmartBlockEntity
 
     @Inject(method = "firstTick", at = @At("RETURN"), remap = false)
     void init(CallbackInfo ci) {
-        CreateAdditionLevelAttachment.getAttachment(getLevel()).connectors.add((AbstractConnectorBlockEntity) (Object) this);
+        CreateAdditionLevelAttachment.getAttachment(getLevel()).connectorPositions.add(getBlockPos());
     }
 
     @Inject(method = "remove()V", at = @At("RETURN"), remap = false)
     void remove(CallbackInfo ci) {
-        CreateAdditionLevelAttachment.getAttachment(getLevel()).connectors.remove(this);
+        CreateAdditionLevelAttachment.getAttachment(getLevel()).connectorPositions.remove(getBlockPos());
     }
 }
