@@ -36,5 +36,5 @@ jobs:
           version-type: release
           modrinth-dependencies: |
             fabric-api
-            hyphapiracea (optional)
             connectiblechains (optional)
+            createaddition (optional)
