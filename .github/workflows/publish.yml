@@ -33,8 +33,15 @@ jobs:
         with:
           modrinth-id: crqH8IT5
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          version-type: release
-          modrinth-dependencies: |
+
+          curseforge-id: 1182075
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          dependencies: |
             fabric-api
             connectiblechains (optional)
+            station-decoration (optional)
             createaddition (optional)
+          
+
+          version-type: release
