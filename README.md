@@ -9,6 +9,8 @@ This mod does not add any cables on its own.
 Instead you can zoop along cables, wires and chains from any of these mods:
 - [HyphaPiracea](https://modrinth.com/mod/hyphapiracea)
 - [Connectible Chains](https://modrinth.com/mod/connectiblechains)
+- [Create Crafts & Additions](https://modrinth.com/mod/createaddition)
+- [Station Decoration (Minecraft Transit Railway addon)](https://modrinth.com/mod/station-decoration)
 
 ## Recipe
 ![recipe](./assets/recipe.png)
