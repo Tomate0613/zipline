@@ -2,6 +2,7 @@ package dev.doublekekse.zipline.client;
 
 import dev.doublekekse.zipline.compat.connectiblechains.ConnectibleChainsCompat;
 import dev.doublekekse.zipline.compat.createaddition.CreateAdditionCompat;
+import dev.doublekekse.zipline.compat.station_decoration.StationDecorationCompat;
 import dev.doublekekse.zipline.duck.GameRendererDuck;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -39,6 +40,9 @@ public class ZiplineClient implements ClientModInitializer {
         }
         if (FabricLoader.getInstance().isModLoaded("createaddition")) {
             CreateAdditionCompat.register();
+        }
+        if (FabricLoader.getInstance().isModLoaded("msd")) {
+            StationDecorationCompat.register();
         }
     }
 
