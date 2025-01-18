@@ -31,8 +31,9 @@ public class ZiplineItem extends Item {
     private static final double HANG_OFFSET = 2.12;
     private static final double TOP_VERTICAL_SNAP_FACTOR = 0.3;
     private static final double SNAP_RADIUS = 3;
+    private static final double MAX_TURN_ANGLE =  0.707;
 
-    public ZiplineItem(Item.Properties properties) {
+    public ZiplineItem(Properties properties) {
         super(properties);
     }
 
@@ -156,7 +157,36 @@ public class ZiplineItem extends Item {
         player.playSound(ZiplineSoundEvents.ZIPLINE_USE, 1.0F, .3f + (float) (speed));
 
         if (progress >= 1.0 || progress <= 0.0) {
-            interruptUsing(player);
+            var nextCables = cable.getNext(directionFactor == 1);
+
+            var playerDir = player.getLookAngle();
+            var cableDir = lastDir.normalize();
+
+            double highestDotProduct = -1;
+            Cable nextCable = null;
+
+            for (var next : nextCables) {
+                if (cable.equals(next)) {
+                    continue;
+                }
+
+                var lookDotProduct = next.direction().dot(playerDir);
+                var cableDotProduct = next.direction().dot(cableDir);
+
+                if (lookDotProduct > highestDotProduct && cableDotProduct > MAX_TURN_ANGLE) {
+                    highestDotProduct = lookDotProduct;
+                    nextCable = next;
+                }
+            }
+
+            if (nextCable == null) {
+                interruptUsing(player);
+                return;
+            }
+
+            cable = nextCable;
+            directionFactor = 1;
+            progress = 0;
         }
     }
 
