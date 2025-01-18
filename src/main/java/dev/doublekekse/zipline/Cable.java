@@ -2,6 +2,9 @@ package dev.doublekekse.zipline;
 
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Collection;
+import java.util.Collections;
+
 public interface Cable {
     double getProgress(Vec3 playerPos);
 
@@ -12,4 +15,8 @@ public interface Cable {
     Vec3 direction();
 
     double length();
+
+    default Collection<Cable> getNext(boolean forward) {
+        return Collections.emptyList();
+    }
 }

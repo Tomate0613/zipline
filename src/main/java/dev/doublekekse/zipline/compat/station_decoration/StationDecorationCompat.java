@@ -20,10 +20,7 @@ public class StationDecorationCompat {
             Cable nearestCable = null;
 
             for (var catenary : catenaries) {
-                var from = toVec3(catenary.getPosition1());
-                var to = toVec3(catenary.getPosition2());
-
-                var cable = new StraightCable(from, to);
+                var cable = StationDecorationCable.of(data, catenary.getPosition1(), catenary.getPosition2());
                 var closestPoint = cable.getClosestPoint(offsetPlayerPos);
 
                 var distance = closestPoint.distanceToSqr(offsetPlayerPos);
