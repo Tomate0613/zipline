@@ -13,7 +13,6 @@
     }
   },
   "result": {
-    "id": "zipline:zipline",
-    "count": 1
+    "item": "zipline:zipline"
   }
 }
