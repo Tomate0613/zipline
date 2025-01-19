@@ -2,7 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "dev.doublekekse.zipline.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ServerGamePacketListenerImplMixin",
     "compat.connectiblechains.EntityMixin",

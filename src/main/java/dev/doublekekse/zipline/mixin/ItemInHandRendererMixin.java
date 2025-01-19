@@ -76,7 +76,7 @@ public abstract class ItemInHandRendererMixin {
         float m = Mth.sin((useFactor - 0.1f) * 1.3f);
         float q = Mth.sin((useFactor * .3f - 0.4f) * 1.3f);
 
-        float influence = Math.clamp((useFactor * .1f) - 0.1f, 0, 1);
+        float influence = Mth.clamp((useFactor * .1f) - 0.1f, 0, 1);
 
         float o = m * influence;
         float l = q * influence;
