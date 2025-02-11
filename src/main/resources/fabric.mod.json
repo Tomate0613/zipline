@@ -26,5 +26,8 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "breaks": {
+    "connectiblechains": "<2.5.2+1.21.1"
   }
 }

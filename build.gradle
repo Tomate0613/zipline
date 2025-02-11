@@ -46,7 +46,7 @@ dependencies {
     modApi "me.shedaniel.cloth:cloth-config-fabric:15.0.140"
 
     modImplementation "maven.modrinth:hyphapiracea:0.1.2.1.fabric"
-    modImplementation "maven.modrinth:connectiblechains:2.4.2+1.21.1"
+    modImplementation "maven.modrinth:connectiblechains:2.5.2+1.21.1"
 }
 
 processResources {
