@@ -232,7 +232,7 @@ public class ZiplineItem extends Item {
         player.startUsingItem(interactionHand);
 
         if (!level.isClientSide) {
-            return InteractionResultHolder.pass(itemStack);
+            return InteractionResultHolder.consume(itemStack);
         }
 
         if (player.isLocalPlayer()) {
