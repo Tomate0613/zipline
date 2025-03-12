@@ -33,6 +33,10 @@ repositories {
     maven {
         url "https://maven.shedaniel.me/"
     }
+
+    flatDir {
+        dir "libs"
+    }
 }
 
 dependencies {
@@ -48,6 +52,7 @@ dependencies {
     modImplementation "maven.modrinth:hyphapiracea:0.1.2.1.fabric"
     modImplementation "maven.modrinth:connectiblechains:2.5.2+1.21.1"
     modImplementation "maven.modrinth:vivatech:1.0.0-alpha.16"
+    modCompileOnly "org.modogthedev.superposition:superposition-fabric:1.21.1-0.2.2"
 }
 
 processResources {

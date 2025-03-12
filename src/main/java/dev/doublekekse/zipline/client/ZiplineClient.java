@@ -1,12 +1,16 @@
 package dev.doublekekse.zipline.client;
 
+import dev.doublekekse.zipline.Cables;
 import dev.doublekekse.zipline.compat.connectiblechains.ConnectibleChainsCompat;
 import dev.doublekekse.zipline.compat.hypha_piracea.HyphaPiraceaCompat;
+import dev.doublekekse.zipline.compat.superposition.SuperpositionCompat;
 import dev.doublekekse.zipline.compat.vivatech.VivatechCompat;
 import dev.doublekekse.zipline.duck.GameRendererDuck;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.particles.ParticleTypes;
 
 public class ZiplineClient implements ClientModInitializer {
 
@@ -46,6 +50,10 @@ public class ZiplineClient implements ClientModInitializer {
 
         if (loader.isModLoaded("vivatech")) {
             VivatechCompat.register();
+        }
+
+        if (loader.isModLoaded("superposition")) {
+            SuperpositionCompat.register();
         }
     }
 
