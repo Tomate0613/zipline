@@ -2,6 +2,7 @@ package dev.doublekekse.zipline.client;
 
 import dev.doublekekse.zipline.compat.connectiblechains.ConnectibleChainsCompat;
 import dev.doublekekse.zipline.compat.hypha_piracea.HyphaPiraceaCompat;
+import dev.doublekekse.zipline.compat.vivatech.VivatechCompat;
 import dev.doublekekse.zipline.duck.GameRendererDuck;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -34,12 +35,17 @@ public class ZiplineClient implements ClientModInitializer {
     }
 
     public void compat() {
-        if (FabricLoader.getInstance().isModLoaded("hyphapiracea")) {
+        var loader = FabricLoader.getInstance();
+        if (loader.isModLoaded("hyphapiracea")) {
             HyphaPiraceaCompat.register();
         }
 
-        if (FabricLoader.getInstance().isModLoaded("connectiblechains")) {
+        if (loader.isModLoaded("connectiblechains")) {
             ConnectibleChainsCompat.register();
+        }
+
+        if (loader.isModLoaded("vivatech")) {
+            VivatechCompat.register();
         }
     }
 
