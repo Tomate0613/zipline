@@ -12,7 +12,7 @@ public interface Cable {
 
     Vec3 getClosestPoint(Vec3 pos);
 
-    Vec3 direction();
+    Vec3 direction(double progress);
 
     double length();
 

@@ -50,7 +50,7 @@ public record VivatechWireCable(Vec3 from, Vec3 to, Vec3 delta, Vec3 direction, 
     }
 
     @Override
-    public Vec3 direction() {
+    public Vec3 direction(double progress) {
         return direction;
     }
 

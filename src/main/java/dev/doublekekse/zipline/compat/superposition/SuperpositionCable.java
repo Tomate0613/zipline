@@ -53,8 +53,15 @@ public record SuperpositionCable(org.modogthedev.superposition.system.cable.Cabl
     }
 
     @Override
-    public Vec3 direction() {
-        return delta().normalize();
+    public Vec3 direction(double progress) {
+        var points = cable.getPoints();
+        var index = (int) (progress * (points.size() - 1));
+
+        if (index == 0) {
+            index++;
+        }
+
+        return points.get(index).getPosition().subtract(points.get(index - 1).getPosition()).normalize();
     }
 
     @Override

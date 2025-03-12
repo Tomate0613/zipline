@@ -83,10 +83,10 @@ public class ZiplineItem extends Item {
     }
 
     void enable(Player player, Vec3 offsetPlayerPos) {
-        directionFactor = player.getLookAngle().dot(cable.direction()) >= 0 ? 1 : -1;
         actuallyUsing = true;
         speed = player.getDeltaMovement().length();
         progress = cable.getProgress(offsetPlayerPos);
+        directionFactor = player.getLookAngle().dot(cable.direction(progress)) >= 0 ? 1 : -1;
 
         var futureT = progress + directionFactor * .1 / cable.length();
         var delta = cable.getPoint(futureT).subtract(offsetPlayerPos);
@@ -170,8 +170,8 @@ public class ZiplineItem extends Item {
                     continue;
                 }
 
-                var lookDotProduct = next.direction().dot(playerDir);
-                var cableDotProduct = next.direction().dot(cableDir);
+                var lookDotProduct = next.direction(0).dot(playerDir);
+                var cableDotProduct = next.direction(0).dot(cableDir);
 
                 if (lookDotProduct > highestDotProduct && cableDotProduct > MAX_TURN_ANGLE) {
                     highestDotProduct = lookDotProduct;

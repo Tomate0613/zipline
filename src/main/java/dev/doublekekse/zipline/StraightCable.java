@@ -29,4 +29,8 @@ public record StraightCable(
         var t = getProgress(pos);
         return getPoint(t);
     }
+
+    public Vec3 direction(double progress) {
+        return direction;
+    }
 }

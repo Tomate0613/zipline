@@ -18,7 +18,7 @@ public class HyphalCable implements Cable {
     @Override
     public double getProgress(Vec3 playerPos) {
         Vec3 playerToStart = playerPos.subtract(wireLine.getStart());
-        double t = playerToStart.dot(direction()) / length; // Parametric position
+        double t = playerToStart.dot(wireLine.getIVec()) / length; // Parametric position
         t = Mth.clamp(t, 0.0, 1.0);
 
         return t;
@@ -38,7 +38,7 @@ public class HyphalCable implements Cable {
     @Override
     public Vec3 getPoint(double progress) {
         var y = lerpedY(progress) + wireLine.getStart().y;
-        return wireLine.getStart().add(direction().scale(progress * length)).with(Direction.Axis.Y, y);
+        return wireLine.getStart().add(wireLine.getIVec().scale(progress * length)).with(Direction.Axis.Y, y);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class HyphalCable implements Cable {
     }
 
     @Override
-    public Vec3 direction() {
+    public Vec3 direction(double progress) {
         return wireLine.getIVec();
     }
 
