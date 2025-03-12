@@ -11,6 +11,7 @@ Instead you can zoop along cables, wires and chains from any of these mods:
 - [Connectible Chains](https://modrinth.com/mod/connectiblechains)
 - [Create Crafts & Additions](https://modrinth.com/mod/createaddition)
 - [Station Decoration (Minecraft Transit Railway addon)](https://modrinth.com/mod/station-decoration)
+- [Vivatech](https://modrinth.com/mod/vivatech)
 
 ## Recipe
 ![recipe](./assets/recipe.png)
