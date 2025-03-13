@@ -66,6 +66,6 @@ public record SuperpositionCable(org.modogthedev.superposition.system.cable.Cabl
 
     @Override
     public double length() {
-        return delta().length();
+        return cable.calculateLength();
     }
 }
