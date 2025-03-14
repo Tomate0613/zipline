@@ -7,8 +7,8 @@ import net.minecraft.world.phys.Vec3;
 
 public record VivatechWireCable(Vec3 from, Vec3 to, Vec3 delta, Vec3 direction, double length) implements Cable {
     public static VivatechWireCable from(Wire wire) {
-        var fromPos = wire.start();
-        var toPos = wire.end();
+        var fromPos = new Vec3(wire.start());
+        var toPos = new Vec3(wire.end());
 
         var delta = toPos.subtract(fromPos);
         var direction = delta.normalize();

@@ -8,9 +8,11 @@ import net.minecraft.client.Minecraft;
 public class VivatechCompat {
     public static void register() {
         Cables.registerProvider((offsetPlayerPos, squaredRadius) -> {
-            assert Minecraft.getInstance().level != null;
+            var level = Minecraft.getInstance().level;
 
-            var wires = VivatechClient.getClientWireManager().getWires();
+            assert level != null;
+
+            var wires = VivatechClient.getClientWireManager().getWires(level.dimension());
 
             double nearestDist = squaredRadius;
             Cable nearestCable = null;
