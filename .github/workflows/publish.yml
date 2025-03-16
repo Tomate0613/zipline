@@ -47,6 +47,3 @@ jobs:
             connectiblechains (optional)
 
           version-type: release
-
-          game-versions: |
-            [1.21, 1.21.1]
