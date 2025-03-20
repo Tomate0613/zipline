@@ -1,16 +1,14 @@
 package dev.doublekekse.zipline.client;
 
-import dev.doublekekse.zipline.Cables;
 import dev.doublekekse.zipline.compat.connectiblechains.ConnectibleChainsCompat;
 import dev.doublekekse.zipline.compat.hypha_piracea.HyphaPiraceaCompat;
+import dev.doublekekse.zipline.compat.phonos.PhonosCompat;
 import dev.doublekekse.zipline.compat.superposition.SuperpositionCompat;
 import dev.doublekekse.zipline.compat.vivatech.VivatechCompat;
 import dev.doublekekse.zipline.duck.GameRendererDuck;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.particles.ParticleTypes;
 
 public class ZiplineClient implements ClientModInitializer {
 
@@ -20,7 +18,12 @@ public class ZiplineClient implements ClientModInitializer {
 
         /*
         ClientTickEvents.START_WORLD_TICK.register((level) -> {
-            var cable = Cables.getClosestCable(level.players().get(0).position(), 10);
+            var players = level.players();
+            if (players.isEmpty()) {
+                return;
+            }
+
+            var cable = Cables.getClosestCable(players.getFirst().position(), 10);
 
             if (cable == null) {
                 return;
@@ -31,7 +34,7 @@ public class ZiplineClient implements ClientModInitializer {
 
                 level.addParticle(ParticleTypes.CRIT,
                     d.x, d.y, d.z,
-                    cable.direction().x * 0.1, cable.direction().y * 0.1, cable.direction().z * 0.1
+                    cable.direction(i).x * 0.1, cable.direction(i).y * 0.1, cable.direction(i).z * 0.1
                 );
             }
         });
@@ -54,6 +57,10 @@ public class ZiplineClient implements ClientModInitializer {
 
         if (loader.isModLoaded("superposition")) {
             SuperpositionCompat.register();
+        }
+
+        if (loader.isModLoaded("phonos")) {
+            PhonosCompat.register();
         }
     }
 

@@ -6,6 +6,7 @@
   "mixins": [
     "ServerGamePacketListenerImplMixin",
     "compat.connectiblechains.EntityMixin",
+    "compat.phonos.BlockEntityOutputsAccessor",
     "compat.superposition.CableManagerMixin"
   ],
   "client": [
