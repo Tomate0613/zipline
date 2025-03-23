@@ -10,7 +10,6 @@ public class Cables {
     private static final List<CableProvider> providers = new ArrayList<>();
 
     public static @Nullable Cable getClosestCable(Vec3 offsetPlayerPos, double radius) {
-
         double nearestDist = radius * radius;
         Cable nearestCable = null;
 

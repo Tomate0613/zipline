@@ -28,7 +28,7 @@ public record PhonosCable(Vec3 from, Vec3 to, Vec3 delta, Vec3 direction, double
         double z = (progress * delta.z);
 
         double dy = length * 0.15 * (0.25 - (Math.pow(progress - 0.5, 2)));
-        double y = (progress * delta.y) - dy + .1;
+        double y = (progress * delta.y) - dy;
 
 
         return from.add(new Vec3(x, y, z));

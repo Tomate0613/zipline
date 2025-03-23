@@ -40,8 +40,8 @@ public class PhonosCompat {
                         continue;
                     }
 
-                    var start = connection.start.calculatePos(level, 0);
-                    var end = connection.end.calculatePos(level, 0);
+                    var start = connection.start.calculatePos(level, 0.125);
+                    var end = connection.end.calculatePos(level, 0.125);
 
                     var cable = PhonosCable.from(start, end);
                     var closestPoint = cable.getClosestPoint(offsetPlayerPos);
