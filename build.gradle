@@ -51,7 +51,7 @@ dependencies {
 
     modImplementation "maven.modrinth:hyphapiracea:0.1.2.1.fabric"
     modImplementation "maven.modrinth:connectiblechains:2.5.2+1.21.1"
-    modImplementation "maven.modrinth:vivatech:1.0.0-alpha.22"
+    modImplementation "maven.modrinth:vivatech:1.0.0-alpha.24"
     modCompileOnly "org.modogthedev.superposition:superposition-fabric:1.21.1-0.2.3"
     modCompileOnly "io.github.foundationgames:phonos:1.0.0-beta.20+fabric-1.21.1"
 }

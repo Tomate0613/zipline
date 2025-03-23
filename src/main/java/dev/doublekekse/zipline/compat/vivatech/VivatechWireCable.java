@@ -1,11 +1,14 @@
 package dev.doublekekse.zipline.compat.vivatech;
 
 import dev.doublekekse.zipline.Cable;
-import falseresync.vivatech.common.power.Wire;
+import falseresync.vivatech.client.wire.WireParameters;
+import falseresync.vivatech.client.wire.WireRenderingRegistry;
+import falseresync.vivatech.common.power.wire.Wire;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
-public record VivatechWireCable(Vec3 from, Vec3 to, Vec3 delta, Vec3 direction, double length) implements Cable {
+public record VivatechWireCable(Vec3 from, Vec3 to, Vec3 delta, Vec3 direction, double length,
+                                WireParameters parameters) implements Cable {
     public static VivatechWireCable from(Wire wire) {
         var fromPos = new Vec3(wire.start());
         var toPos = new Vec3(wire.end());
@@ -14,7 +17,9 @@ public record VivatechWireCable(Vec3 from, Vec3 to, Vec3 delta, Vec3 direction, 
         var direction = delta.normalize();
         var length = delta.length();
 
-        return new VivatechWireCable(fromPos, toPos, delta, direction, length);
+        var parameters = WireRenderingRegistry.getAndBuild(wire);
+
+        return new VivatechWireCable(fromPos, toPos, delta, direction, length, parameters);
     }
 
     @Override
@@ -28,19 +33,12 @@ public record VivatechWireCable(Vec3 from, Vec3 to, Vec3 delta, Vec3 direction, 
 
     @Override
     public Vec3 getPoint(double progress) {
-        double y = getSaggedY(progress, progress * delta.y, length);
-        double x = (progress * delta.x);
-        double z = (progress * delta.z);
+        double x = from.x + (progress * delta.x);
+        double z = from.z + (progress * delta.z);
 
-        return from.add(new Vec3(x, y, z));
-    }
+        double y = parameters.getSaggedYForX((float) (from.y + (progress * delta.y)), (float) (progress * length));
 
-    private double getSaggedY(double progress, double dY, double length) {
-        return dY + getSaggingCoefficient(length) * (4 * progress * (progress - 1));
-    }
-
-    private float getSaggingCoefficient(double length) {
-        return length < 5 ? 0.3f : 0.4f;
+        return new Vec3(x, y, z);
     }
 
     @Override
