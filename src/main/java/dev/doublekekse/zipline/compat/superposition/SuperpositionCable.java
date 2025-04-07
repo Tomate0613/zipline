@@ -34,11 +34,18 @@ public record SuperpositionCable(org.modogthedev.superposition.system.cable.Cabl
     }
 
     @Override
+    public boolean isValid() {
+        return cable.getPoints().size() >= 2;
+    }
+
+    @Override
     public Vec3 getPoint(double progress) {
+        assert progress >= 0 && progress <= 1;
+
         var points = cable.getPoints();
         var spline = CatmulRomSpline.generateSpline(points.stream().map(RopeNode::getPosition).toList(), SuperpositionConstants.cableSegments);
 
-        return spline.get((int) (progress * (spline.size() - 1)));
+        return spline.get((int) (Math.clamp(progress, 0, 1) * (spline.size() - 1)));
     }
 
     @Override
@@ -47,15 +54,12 @@ public record SuperpositionCable(org.modogthedev.superposition.system.cable.Cabl
         return getPoint(t);
     }
 
-    private Vec3 delta() {
-        var points = cable.getPoints();
-        return points.getLast().getPosition().subtract(points.getFirst().getPosition());
-    }
-
     @Override
     public Vec3 direction(double progress) {
+        assert progress >= 0 && progress <= 1;
+
         var points = cable.getPoints();
-        var index = (int) (progress * (points.size() - 1));
+        var index = (int) (Math.clamp(progress, 0, 1) * (points.size() - 1));
 
         if (index == 0) {
             index++;
