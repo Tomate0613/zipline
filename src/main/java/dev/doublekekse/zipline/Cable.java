@@ -19,4 +19,8 @@ public interface Cable {
     default Collection<Cable> getNext(boolean forward) {
         return Collections.emptyList();
     }
+
+    default boolean isValid() {
+        return true;
+    }
 }

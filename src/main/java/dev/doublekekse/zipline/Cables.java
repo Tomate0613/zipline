@@ -29,6 +29,11 @@ public class Cables {
             }
         }
 
+        assert nearestCable == null || nearestCable.isValid();
+        if (nearestCable != null && !nearestCable.isValid()) {
+            return null;
+        }
+
         return nearestCable;
     }
 

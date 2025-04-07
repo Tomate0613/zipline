@@ -20,6 +20,10 @@ public class SuperpositionCompat {
             Cable nearestCable = null;
 
             for (var superCable : cables.values()) {
+                if (superCable.getPoints().isEmpty()) {
+                    continue;
+                }
+
                 var cable = new SuperpositionCable(superCable);
                 var closestPoint = cable.getClosestPoint(offsetPlayerPos);
 

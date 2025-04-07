@@ -64,7 +64,7 @@ public class ZiplineItem extends Item {
 
             cable = Cables.getClosestCable(offsetPlayerPos, SNAP_RADIUS);
 
-            if (cable == null) {
+            if (cable == null || !cable.isValid()) {
                 return;
             }
 
@@ -98,6 +98,7 @@ public class ZiplineItem extends Item {
     }
 
     void disable() {
+        cable = null;
         actuallyUsing = false;
         speed = 0;
     }
@@ -132,6 +133,11 @@ public class ZiplineItem extends Item {
     }
 
     void ziplineTick(Player player, Level level) {
+        if(!cable.isValid()) {
+            interruptUsing(player);
+            return;
+        }
+
         var closestPoint = cable.getPoint(progress);
 
         updateSpeed();
