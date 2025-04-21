@@ -51,6 +51,8 @@ public class ZiplineItem extends Item {
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack itemStack, int i) {
         super.onUseTick(level, livingEntity, itemStack, i);
 
+        //TODO: Only reset fall damage, if on cable
+        livingEntity.resetFallDistance();
 
         if (!level.isClientSide || !(livingEntity instanceof Player player) || !player.isLocalPlayer()) {
             return;
