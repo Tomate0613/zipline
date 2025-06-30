@@ -21,12 +21,14 @@ public class ConnectibleChainsCompat {
             Cable nearestCable = null;
 
             for (var knot : knots) {
-                for (var chainLink : knot.getLinks()) {
-                    var from = chainLink.primary;
-                    var to = chainLink.secondary;
+                for (var chainData : knot.getChainDataSet()) {
+                    var holder = knot.getChainHolder(chainData);
 
+                    if (holder == null) {
+                        continue;
+                    }
 
-                    var cable = ChainCable.from(from, to);
+                    var cable = ChainCable.from(knot, holder);
                     var closestPoint = cable.getClosestPoint(offsetPlayerPos);
 
                     var distance = closestPoint.distanceToSqr(offsetPlayerPos);
