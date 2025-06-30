@@ -65,7 +65,7 @@ dependencies {
     modImplementation "maven.modrinth:createaddition:fabric-1.20.1-1.2.6"
 
 
-    include modApi('teamreborn:energy:2.3.0') {
+    implementation modApi('teamreborn:energy:2.3.0') {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
