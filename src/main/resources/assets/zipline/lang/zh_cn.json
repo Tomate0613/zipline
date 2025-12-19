@@ -1,0 +1,9 @@
+{
+  "item.zipline.zipline": "滑索抓钩",
+  "itemGroup.zipline.zipline": "滑索",
+
+  "subtitles.zipline.zipline.use": "滑行声",
+  "subtitles.zipline.zipline.attach": "连接滑索声",
+  "subtitles.zipline.zipline.detach": "脱离滑索声",
+  "subtitles.zipline.zipline.interrupt": "滑行中断声"
+}
