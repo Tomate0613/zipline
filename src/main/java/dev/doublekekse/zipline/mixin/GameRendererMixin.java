@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class GameRendererMixin implements GameRendererDuck {
     @Shadow
     @Final
-    Minecraft minecraft;
+    private Minecraft minecraft;
     @Unique
     int ziplineTilt = 0;
     @Unique

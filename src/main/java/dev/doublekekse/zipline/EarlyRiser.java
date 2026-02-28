@@ -8,10 +8,10 @@ import net.fabricmc.loader.api.MappingResolver;
 public class EarlyRiser implements Runnable {
     @Override
     public void run() {
-        addItemAnimation("ZIPLINE", true);
+        addItemAnimation("ZIPLINE", true, true);
     }
 
-    void addItemAnimation(String name, boolean twoHanded) {
+    void addItemAnimation(String name, boolean twoHanded, boolean affectsOffhandPose) {
         MappingResolver remapper = FabricLoader.getInstance().getMappingResolver();
 
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
@@ -19,6 +19,6 @@ public class EarlyRiser implements Runnable {
         }
 
         String armPose = remapper.mapClassName("intermediary", "net.minecraft.class_572$class_573");
-        ClassTinkerers.enumBuilder(armPose, boolean.class).addEnum(name, twoHanded).build();
+        ClassTinkerers.enumBuilder(armPose, boolean.class, boolean.class).addEnum(name, twoHanded, affectsOffhandPose).build();
     }
 }

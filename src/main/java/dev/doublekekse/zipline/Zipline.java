@@ -4,7 +4,7 @@ import dev.doublekekse.zipline.registry.ZiplineCreativeTabs;
 import dev.doublekekse.zipline.registry.ZiplineItems;
 import dev.doublekekse.zipline.registry.ZiplineSoundEvents;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class Zipline implements ModInitializer {
     @Override
@@ -14,7 +14,7 @@ public class Zipline implements ModInitializer {
         ZiplineSoundEvents.register();
     }
 
-    public static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath("zipline", path);
+    public static Identifier id(String path) {
+        return Identifier.fromNamespaceAndPath("zipline", path);
     }
 }

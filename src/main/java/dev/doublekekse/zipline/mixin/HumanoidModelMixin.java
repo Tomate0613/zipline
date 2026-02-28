@@ -22,10 +22,6 @@ public class HumanoidModelMixin<T extends HumanoidRenderState> {
     @Final
     public ModelPart rightArm;
 
-    @Shadow
-    @Final
-    public ModelPart body;
-
     /*
     @Inject(method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/HumanoidModel;setupAttackAnimation(Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;F)V"))
     void poseLeftArm(T state, CallbackInfo ci) {
@@ -49,19 +45,20 @@ public class HumanoidModelMixin<T extends HumanoidRenderState> {
          */
 
     @Inject(method = "poseLeftArm", at = @At("HEAD"))
-    void poseLeftArm(T state, HumanoidModel.ArmPose armPose, CallbackInfo ci) {
+    void poseLeftArm(T state, CallbackInfo ci) {
         if (state.leftArmPose == HumanoidModel.ArmPose.valueOf("ZIPLINE")) {
             positionArm(leftArm);
         }
     }
 
     @Inject(method = "poseRightArm", at = @At("HEAD"))
-    void poseRightArm(T state, HumanoidModel.ArmPose armPose, CallbackInfo ci) {
+    void poseRightArm(T state, CallbackInfo ci) {
         if (state.rightArmPose == HumanoidModel.ArmPose.valueOf("ZIPLINE")) {
             positionArm(rightArm);
         }
     }
 
+    /*
     @Unique
     ModelPart getArmModel(HumanoidArm arm) {
         if (arm == HumanoidArm.RIGHT) {
@@ -70,6 +67,7 @@ public class HumanoidModelMixin<T extends HumanoidRenderState> {
             return leftArm;
         }
     }
+     */
 
     @Unique
     void positionArm(ModelPart arm) {
