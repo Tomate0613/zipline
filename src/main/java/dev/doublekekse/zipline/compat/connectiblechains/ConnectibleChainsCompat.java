@@ -1,5 +1,7 @@
 package dev.doublekekse.zipline.compat.connectiblechains;
 
+import java.util.ArrayList;
+
 import com.github.legoatoom.connectiblechains.ConnectibleChains;
 import com.github.legoatoom.connectiblechains.entity.ChainKnotEntity;
 import dev.doublekekse.zipline.Cable;
@@ -21,7 +23,7 @@ public class ConnectibleChainsCompat {
             Cable nearestCable = null;
 
             for (var knot : knots) {
-                for (var chainData : knot.getChainDataSet()) {
+                for (var chainData : new ArrayList<>(knot.getChainDataSet())) {
                     var holder = knot.getChainHolder(chainData);
 
                     if (holder == null) {
