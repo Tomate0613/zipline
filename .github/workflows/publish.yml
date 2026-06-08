@@ -38,8 +38,9 @@ jobs:
           modrinth-dependencies: |
             fabric-api
             connectiblechains (optional)
-#            hyphapiracea (optional)
             vivatech (optional)
+
+          # hyphapiracea (optional)
 
           # curseforge-id: 1182075
           # curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
