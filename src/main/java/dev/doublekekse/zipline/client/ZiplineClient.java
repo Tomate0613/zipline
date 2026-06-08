@@ -1,9 +1,9 @@
 package dev.doublekekse.zipline.client;
 
 import dev.doublekekse.zipline.compat.connectiblechains.ConnectibleChainsCompat;
-import dev.doublekekse.zipline.compat.hypha_piracea.HyphaPiraceaCompat;
-import dev.doublekekse.zipline.compat.phonos.PhonosCompat;
-import dev.doublekekse.zipline.compat.superposition.SuperpositionCompat;
+//import dev.doublekekse.zipline.compat.hypha_piracea.HyphaPiraceaCompat;
+//import dev.doublekekse.zipline.compat.phonos.PhonosCompat;
+//import dev.doublekekse.zipline.compat.superposition.SuperpositionCompat;
 import dev.doublekekse.zipline.compat.vivatech.VivatechCompat;
 import dev.doublekekse.zipline.duck.GameRendererDuck;
 import net.fabricmc.api.ClientModInitializer;
@@ -43,9 +43,9 @@ public class ZiplineClient implements ClientModInitializer {
 
     public void compat() {
         var loader = FabricLoader.getInstance();
-        if (loader.isModLoaded("hyphapiracea")) {
-            HyphaPiraceaCompat.register();
-        }
+//        if (loader.isModLoaded("hyphapiracea")) {
+//            HyphaPiraceaCompat.register();
+//        }
 
         if (loader.isModLoaded("connectiblechains")) {
             ConnectibleChainsCompat.register();
@@ -55,13 +55,13 @@ public class ZiplineClient implements ClientModInitializer {
             VivatechCompat.register();
         }
 
-        if (loader.isModLoaded("superposition")) {
-            SuperpositionCompat.register();
-        }
+//        if (loader.isModLoaded("superposition")) {
+//            SuperpositionCompat.register();
+//        }
 
-        if (loader.isModLoaded("phonos")) {
-            PhonosCompat.register();
-        }
+//        if (loader.isModLoaded("phonos")) {
+//            PhonosCompat.register();
+//        }
     }
 
     public static void ziplineTilt(float yaw) {

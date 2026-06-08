@@ -4,6 +4,7 @@
   "package": "dev.doublekekse.zipline.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ArmPoseMixin",
     "ServerGamePacketListenerImplMixin",
     "compat.connectiblechains.EntityMixin",
     "compat.phonos.BlockEntityOutputsAccessor",

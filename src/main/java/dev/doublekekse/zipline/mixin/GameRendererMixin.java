@@ -5,6 +5,7 @@ import com.mojang.math.Axis;
 import dev.doublekekse.zipline.duck.GameRendererDuck;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,11 +26,12 @@ public class GameRendererMixin implements GameRendererDuck {
     float ziplineTiltDirection;
 
     @Inject(method = "bobHurt", at = @At("HEAD"))
-    void bobHurt(PoseStack poseStack, float tickDelta, CallbackInfo ci) {
+    void bobHurt(CameraRenderState cameraState, PoseStack poseStack, CallbackInfo ci) {
         if (ziplineTilt < 0) {
             return;
         }
 
+        float tickDelta = minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(false);
         float g = ziplineTilt - tickDelta;
         g /= 10;
         g = Mth.sin(g * g * g * g * (float) Math.PI);

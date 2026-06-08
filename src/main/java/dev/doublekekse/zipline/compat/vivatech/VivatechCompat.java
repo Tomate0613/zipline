@@ -12,7 +12,7 @@ public class VivatechCompat {
 
             assert level != null;
 
-            var wires = VivatechClient.getClientWireManager().getWires(level.dimension());
+            var wires = VivatechClient.getWiresManager().getFor(level.dimension());
 
             double nearestDist = squaredRadius;
             Cable nearestCable = null;

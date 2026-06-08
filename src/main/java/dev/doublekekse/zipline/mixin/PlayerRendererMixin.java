@@ -13,13 +13,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AvatarRenderer.class)
 public class PlayerRendererMixin {
-    /***
-     * @see dev.doublekekse.zipline.EarlyRiser
-     */
     @Inject(method = "getArmPose(Lnet/minecraft/world/entity/Avatar;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/client/model/HumanoidModel$ArmPose;", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getUseAnimation()Lnet/minecraft/world/item/ItemUseAnimation;"), cancellable = true)
-    private static void getArmPos(Avatar avatar, ItemStack itemStack, InteractionHand interactionHand, CallbackInfoReturnable<HumanoidModel.ArmPose> cir) {
-        if(itemStack.is(ZiplineItems.ZIPLINE))  {
-            cir.setReturnValue(HumanoidModel.ArmPose.valueOf("ZIPLINE"));
+    private static void getArmPos(Avatar avatar, ItemStack itemInHand, InteractionHand hand, CallbackInfoReturnable<HumanoidModel.ArmPose> cir) {
+        if(itemInHand.is(ZiplineItems.ZIPLINE))  {
+            cir.setReturnValue(HumanoidModel.ArmPose.ZIPLINE_ZIPLINE);
         }
     }
 }

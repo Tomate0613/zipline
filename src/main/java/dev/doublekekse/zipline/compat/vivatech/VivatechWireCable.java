@@ -3,7 +3,7 @@ package dev.doublekekse.zipline.compat.vivatech;
 import dev.doublekekse.zipline.Cable;
 import falseresync.vivatech.client.wire.WireParameters;
 import falseresync.vivatech.client.wire.WireRenderingRegistry;
-import falseresync.vivatech.common.power.wire.Wire;
+import falseresync.vivatech.world.electricity.wire.Wire;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
@@ -17,7 +17,7 @@ public record VivatechWireCable(Vec3 from, Vec3 to, Vec3 delta, Vec3 direction, 
         var direction = delta.normalize();
         var length = delta.length();
 
-        var parameters = WireRenderingRegistry.getAndBuild(wire);
+        var parameters = WireRenderingRegistry.buildParameters(wire);
 
         return new VivatechWireCable(fromPos, toPos, delta, direction, length, parameters);
     }

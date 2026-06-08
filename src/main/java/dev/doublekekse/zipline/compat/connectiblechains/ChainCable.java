@@ -1,6 +1,7 @@
 package dev.doublekekse.zipline.compat.connectiblechains;
 
-import com.github.legoatoom.connectiblechains.util.Helper;
+import com.evandev.connectiblechains.CommonClass;
+import com.evandev.connectiblechains.util.MathHelper;
 import dev.doublekekse.zipline.Cable;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -38,7 +39,7 @@ public record ChainCable(Vec3 from, Vec3 to, Vec3 delta, Vec3 direction, double 
         double distanceXZ = (float) Math.sqrt(Math.fma(delta.x(), delta.x(), delta.z() * delta.z()));
         double wrongDistanceFactor = length / distanceXZ;
         double a = (progress * distanceXZ);
-        double y = Helper.drip2(a * wrongDistanceFactor, length, delta.y()) + .4f;
+        double y = MathHelper.drip2(a * wrongDistanceFactor, length, delta.y(), CommonClass.fileConfig.getChainHangAmount()) + .4f;
 
         double x = (progress * delta.x);
         double z = (progress * delta.z);

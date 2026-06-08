@@ -17,21 +17,15 @@
     ],
     "main": [
       "dev.doublekekse.zipline.Zipline"
-    ],
-    "mm:early_risers": [
-      "dev.doublekekse.zipline.EarlyRiser"
     ]
   },
+  "accessWidener": "zipline.classtweaker",
   "mixins": [
     "zipline.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
-    "minecraft": "${minecraft_version}",
-    "mm": ">=2.3"
-  },
-  "breaks": {
-    "connectiblechains": "<2.5.2+1.21.1"
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
   }
 }
