@@ -1,0 +1,10 @@
+{
+  "item.zipline.zipline": "Зиплайн",
+  "itemGroup.zipline.zipline": "Zipline",
+
+  "subtitles.zipline.zipline.use": "Зиплайн шумит",
+  "subtitles.zipline.zipline.attach": "Зиплайн закрепился",
+  "subtitles.zipline.zipline.detach": "Зиплайн открепился",
+  "subtitles.zipline.zipline.interrupt": "Зиплайн сорвался",
+  "modmenu.descriptionTranslation.zipline": "Зиплайн из Satisfactory прямо в Minecraft!"
+}
